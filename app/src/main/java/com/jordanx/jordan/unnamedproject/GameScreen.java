@@ -58,8 +58,8 @@ public class GameScreen extends Activity {
         }
 
         BitmapDrawable bdrawable = new BitmapDrawable(photo);
-        ImageButton derp = (ImageButton) findViewById(R.id.gameButton);
-        derp.setImageBitmap(photo);
+        ImageButton derp = (ImageButton) findViewById(R.id.iconButton);
+        //derp.setImageBitmap(photo);
 
 
 //TIMER FOR MOVING THE BUTTON AUTOMATICALLY
@@ -99,7 +99,7 @@ public class GameScreen extends Activity {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
-        ImageButton theButton = (ImageButton) findViewById(R.id.gameButton);
+        ImageButton theButton = (ImageButton) findViewById(R.id.iconButton);
 
         Random r = new Random();
 
