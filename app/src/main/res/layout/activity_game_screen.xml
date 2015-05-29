@@ -1,0 +1,103 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}"
+    android:background="#03A9F4"
+    android:id="@+id/gamescreen"
+    android:padding="5dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingRight="5dp">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gameButton"
+        android:background="@drawable/circlebutton2"
+        android:src="@drawable/circlebutton2"
+        android:minHeight="100dp"
+        android:minWidth="100dp"
+        android:padding="5dp"
+        android:onClick="btnClick"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/score"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="58dp"
+        android:layout_marginStart="58dp" />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/timerText"
+        android:textSize="30dp"
+        android:textColor="#FFFFFFFF"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/score"
+        android:textSize="30dp"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentTop="false"
+        android:layout_toEndOf="@+id/scoreLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Score:"
+        android:id="@+id/scoreLabel"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Time:"
+        android:id="@+id/textView2"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/gameButton"
+        android:layout_alignEnd="@+id/gameButton" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="II"
+        android:id="@+id/pauseButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/timerText"
+        android:textSize="30sp"
+        android:nestedScrollingEnabled="true"
+        android:onClick="pauseClick" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton10"
+        android:layout_marginTop="117dp"
+        android:src="@mipmap/hqdefault34"
+        android:layout_below="@+id/gameButton"
+        android:layout_toRightOf="@+id/timerText"
+        android:layout_toEndOf="@+id/timerText"
+        android:background="@android:color/transparent"
+        />
+
+</RelativeLayout>
