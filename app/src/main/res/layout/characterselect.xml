@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#00BCD4">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton10"
+        android:layout_marginTop="71dp"
+        android:minHeight="150px"
+        android:minWidth="150px"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/imageButton11"
+        android:src="@mipmap/hqdefault34"
+        android:maxHeight="150px"
+        android:maxWidth="150px" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton11"
+        android:minHeight="150px"
+        android:minWidth="150px"
+        android:layout_alignTop="@+id/imageButton10"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/badkinney" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton12"
+        android:src="@mipmap/gadget2"
+        android:layout_below="@+id/imageButton10"
+        android:layout_alignLeft="@+id/imageButton10"
+        android:layout_alignStart="@+id/imageButton10" />
+
+</RelativeLayout>

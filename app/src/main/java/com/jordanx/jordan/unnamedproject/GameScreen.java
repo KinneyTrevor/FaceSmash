@@ -102,6 +102,31 @@ public class GameScreen extends Activity {
         theButton.setX(x);
         theButton.setY(y);
     }
+    public void onPause(){
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+        new AlertDialog.Builder(this)
+                .setTitle("Time Paused")
+                .setMessage("Would you like to restart the game?")
+                .setPositiveButton("Resume", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                createCountDown(timerValue);
+                                dialog.cancel();
+                            }
+                        }
+                )
+                .setNegativeButton("Leave", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent hs = new Intent(getApplicationContext(), MainMenu.class);
+                        startActivity(hs);
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
 
     public void pauseClick(View a) {
         if (mCountDownTimer != null) {
@@ -131,8 +156,8 @@ public class GameScreen extends Activity {
     public void endGame(){
         new AlertDialog.Builder(this)
                 .setTitle("Game Over!")
-                .setMessage("Would you like to restart the game?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setMessage("Would you like to play again?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent hs = new Intent(getApplicationContext(), GameScreen.class);
                                 startActivity(hs);
@@ -140,7 +165,7 @@ public class GameScreen extends Activity {
                             }
                         }
                 )
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
                         Intent hs = new Intent(getApplicationContext(), MainMenu.class);
