@@ -42,6 +42,7 @@ public class GameScreen extends Activity {
         }
 
         public void onFinish() {
+            timerText.setText("" + 0);
             updateHS(userScore);
         }
     }.start();
@@ -52,11 +53,10 @@ public class GameScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         if (getIntent().hasExtra("byteArray")) {
-            timerText = (TextView) findViewById(R.id.timerText);
             photo = BitmapFactory.decodeByteArray(
                     getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
         }
-
+        timerText = (TextView) findViewById(R.id.timerText);
         BitmapDrawable bdrawable = new BitmapDrawable(photo);
         ImageButton derp = (ImageButton) findViewById(R.id.iconButton);
         //derp.setImageBitmap(photo);
@@ -112,26 +112,16 @@ public class GameScreen extends Activity {
     public void pauseClick(View a) {
 
         new AlertDialog.Builder(this)
-                .setTitle("Game Paused")
-                .setMessage("Would you like to return to the game?")
+                .setTitle("Game Over!")
+                .setMessage("Would you like to restart the game?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
-
-                        CountDownTimer newTimer = new CountDownTimer(timerValue, 1000) {
-                            public void onTick(long millisUntilFinished) {
-                                timerText.setText("" + millisUntilFinished / 1000);
-                                String z = timerText.getText().toString();
-                                timerValue = (Integer.parseInt(z)) * 1000;
-                            }
-
-                            public void onFinish() {
-                                updateHS(userScore);
-                            }
-                        }.start();
+                        Intent hs = new Intent(getApplicationContext(), GameScreen.class);
+                        startActivity(hs);
+                        dialog.cancel();
                     }
-
-                })
+                }
+                )
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 

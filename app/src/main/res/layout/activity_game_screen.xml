@@ -98,6 +98,6 @@
         android:layout_toRightOf="@+id/timerText"
         android:layout_toEndOf="@+id/timerText"
         android:background="@android:color/transparent"
-        />
+        android:onClick="btnClick" />
 
 </RelativeLayout>

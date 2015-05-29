@@ -16,7 +16,7 @@ public class MainMenu extends Activity {
         setContentView(R.layout.activity_main_menu);
     }
     public void launchCamera(View view){
-       Intent launchCam = new Intent(view.getContext(),cameraActivity.class);
+       Intent launchCam = new Intent(view.getContext(),GameScreen.class);
        startActivity(launchCam);
     }
     public void quitApp(View view){
