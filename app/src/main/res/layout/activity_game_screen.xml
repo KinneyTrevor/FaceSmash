@@ -111,7 +111,6 @@
         android:background="@drawable/circlebutton2"
         android:layout_below="@+id/badIcon"
         android:layout_toLeftOf="@+id/pauseButton"
-        android:layout_toStartOf="@+id/pauseButton"
-        android:layout_marginTop="28dp" />
+        android:layout_toStartOf="@+id/pauseButton" />
 
 </RelativeLayout>
