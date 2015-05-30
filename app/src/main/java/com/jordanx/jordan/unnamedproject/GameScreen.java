@@ -96,16 +96,17 @@ public class GameScreen extends Activity {
         ImageButton theButton = (ImageButton) findViewById(R.id.goodIcon);
         ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
 
-
+        //Button one
         Random r = new Random();
-
-        int x = r.nextInt(width - 100);
-        int y = r.nextInt(height - 100);
+        int x = r.nextInt(width - 400);
+        int y = r.nextInt(height - 400);
         theButton.setX(x);
         theButton.setY(y);
+
+        //Button two - button
         r = new Random();
-        x = r.nextInt(width - 250);
-        y = r.nextInt(height - 250);
+        x = r.nextInt(width - 400);
+        y = r.nextInt(height - 400);
         altbutton.setX(x);
         altbutton.setY(y);
 
