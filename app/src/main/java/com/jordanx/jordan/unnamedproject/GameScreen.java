@@ -97,26 +97,39 @@ public class GameScreen extends Activity {
         ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
 
         //Button one
-        Random r = new Random();
-        int Button1H = r.nextInt(width - 400);
-        int Button1W = r.nextInt(height - 1650);
+
+        Random r1 = new Random();
+        int Button1H = r1.nextInt(width - 400);
+        int Button1W = r1.nextInt(height - 1650);
         theButton.setX(Button1H);
         theButton.setY(Button1W);
-        
+
+
         //Button two - button
-        r = new Random();
-        int Button2H = r.nextInt(width - 400);
-        int Button2W = r.nextInt(height - 1650);
+        Random r2 = new Random();
+        int Button2H = r2.nextInt(width - 400);
+        int Button2W = r2.nextInt(height - 1650);
         altbutton.setX(Button2H);
         altbutton.setY(Button2W);
 
+        if(checkOverlap(Button1H, Button1W, Button2H, Button2W) == true) {
+            theButton.setX(Button1H+500);
+            theButton.setY(Button1W+500);
+            altbutton.setX(Button2H+500);
+            altbutton.setY(Button2W+500);
+        }
+
     }
-    //Function to check overlap between buttons -
+    //Function to check overlap between buttons - Is kind of working but need to fix them crossing the border.. damn Mexicans
     public boolean checkOverlap(int x1, int x2, int y1, int y2){
         int Button1H = x1, Button1W = y1, Button2H = x2, Button2W = y2; //
-        if(Button1H <= Button2H + 250 && Button1H >= Button2H - 250){
+        if(Button1H <= Button2H + 250 && Button1H >= Button2H - 250  ){
             return true;
         }
+        else if (Button2H <= Button2H + 250 && Button2H >= Button2H - 250){
+            return true;
+        }
+
         return false;
     }
 
