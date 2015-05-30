@@ -22,7 +22,7 @@ public class GameScreen extends Activity {
     Bitmap photo;
     TextView timerText;
     TextView scoreText;
-    int timerValue = 30000;
+    int timerValue = 60000; //change me back to 30,000
     final Context context = this;
     CountDownTimer mCountDownTimer;
 
@@ -44,7 +44,7 @@ public class GameScreen extends Activity {
 
 
         //TIMER FOR MOVING THE BUTTON AUTOMATICALLY
-        CountDownTimer z = new CountDownTimer(30000, 750) {
+        CountDownTimer z = new CountDownTimer(60000, 750) { //change me back 30,000/750 to make time reasonable
             public void onTick(long millisUntilFinished) {
                 moveButton();
             }
@@ -98,20 +98,27 @@ public class GameScreen extends Activity {
 
         //Button one
         Random r = new Random();
-        int x = r.nextInt(width - 400);
-        int y = r.nextInt(height - 650);
-        theButton.setX(x);
-        theButton.setY(y);
-
+        int Button1H = r.nextInt(width - 400);
+        int Button1W = r.nextInt(height - 1650);
+        theButton.setX(Button1H);
+        theButton.setY(Button1W);
+        
         //Button two - button
         r = new Random();
-        x = r.nextInt(width - 400);
-        y = r.nextInt(height - 650);
-        altbutton.setX(x);
-        altbutton.setY(y);
+        int Button2H = r.nextInt(width - 400);
+        int Button2W = r.nextInt(height - 1650);
+        altbutton.setX(Button2H);
+        altbutton.setY(Button2W);
 
     }
-    //Fuck you Jordan
+    //Function to check overlap between buttons -
+    public boolean checkOverlap(int x1, int x2, int y1, int y2){
+        int Button1H = x1, Button1W = y1, Button2H = x2, Button2W = y2; //
+        if(Button1H <= Button2H + 250 && Button1H >= Button2H - 250){
+            return true;
+        }
+        return false;
+    }
 
    //Called if user presses menu button or back button
     public void onPause(){
