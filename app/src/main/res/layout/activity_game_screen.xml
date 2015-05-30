@@ -64,7 +64,8 @@
         android:textSize="30sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:typeface="sans" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -95,22 +96,22 @@
         android:layout_height="wrap_content"
         android:id="@+id/badIcon"
         android:src="@mipmap/hqdefault34"
-        android:background="@android:color/transparent"
+        android:background="@drawable/circlebutton2"
         android:onClick="btnClick"
-        android:layout_below="@+id/gameButton"
         android:layout_toRightOf="@+id/score"
         android:layout_toEndOf="@+id/score"
-        android:layout_marginTop="27dp" />
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/gameButton" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/goodIcon"
-        android:layout_marginTop="43dp"
         android:src="@mipmap/badkinney"
-        android:background="@android:color/transparent"
+        android:background="@drawable/circlebutton2"
         android:layout_below="@+id/badIcon"
         android:layout_toLeftOf="@+id/pauseButton"
-        android:layout_toStartOf="@+id/pauseButton" />
+        android:layout_toStartOf="@+id/pauseButton"
+        android:layout_marginTop="28dp" />
 
 </RelativeLayout>
