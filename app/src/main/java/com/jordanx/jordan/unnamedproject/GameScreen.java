@@ -94,6 +94,8 @@ public class GameScreen extends Activity {
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
         ImageButton theButton = (ImageButton) findViewById(R.id.goodIcon);
+        ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
+
 
         Random r = new Random();
 
@@ -101,6 +103,12 @@ public class GameScreen extends Activity {
         int y = r.nextInt(height - 100);
         theButton.setX(x);
         theButton.setY(y);
+        r = new Random();
+        x = r.nextInt(width - 250);
+        y = r.nextInt(height - 250);
+        altbutton.setX(x);
+        altbutton.setY(y);
+
     }
 
    //Called if user presses menu button or back button

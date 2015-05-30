@@ -13,4 +13,6 @@
     <string name="title_activity_galery">Galery</string>
 
     <string name="title_activity_gallery">Gallery</string>
+
+    <string name="title_activity_character_slect">characterSlect</string>
 </resources>

@@ -15,7 +15,8 @@
         android:src="@mipmap/hqdefault34"
         android:maxHeight="150px"
         android:maxWidth="150px"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:focusableInTouchMode="false" />
 
     <ImageButton
         android:layout_width="wrap_content"

@@ -98,10 +98,12 @@
         android:src="@mipmap/hqdefault34"
         android:background="@drawable/circlebutton2"
         android:onClick="btnClick"
-        android:layout_toRightOf="@+id/score"
-        android:layout_toEndOf="@+id/score"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/gameButton" />
+        android:padding="10dp"
+        android:layout_alignTop="@+id/gameButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="33dp"
+        android:layout_marginStart="33dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -109,8 +111,9 @@
         android:id="@+id/goodIcon"
         android:src="@mipmap/badkinney"
         android:background="@drawable/circlebutton2"
-        android:layout_below="@+id/badIcon"
-        android:layout_toLeftOf="@+id/pauseButton"
-        android:layout_toStartOf="@+id/pauseButton" />
+        android:layout_alignTop="@+id/badIcon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:padding="10dp" />
 
 </RelativeLayout>
