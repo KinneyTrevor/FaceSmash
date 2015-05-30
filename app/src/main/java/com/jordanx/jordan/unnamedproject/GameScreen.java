@@ -31,7 +31,7 @@ public class GameScreen extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
-
+        //If this got started from activity_camera.java grab the photo that was passed with it
         if (getIntent().hasExtra("byteArray")) {
             photo = BitmapFactory.decodeByteArray(
                     getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
@@ -53,7 +53,7 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
-
+//This is the main time count down at the top of the screen
     public void createCountDown(int timerVal){
        mCountDownTimer = new CountDownTimer(timerVal, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -68,7 +68,7 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
-
+//Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
     public void updateHS(int x) {
         SharedPreferences mypreferences = getSharedPreferences("App_preferences_file", Context.MODE_PRIVATE);
         int currentHS = mypreferences.getInt("highscore", 0);
@@ -82,13 +82,13 @@ public class GameScreen extends Activity {
             endGame();
         }
     }
-
+//Increments user score.
     public void btnClick(View v) {
         scoreText = (TextView) findViewById(R.id.score);
         userScore++;
         scoreText.setText(String.valueOf(userScore));
     }
-
+//Moves the actual button
     public void moveButton() {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
@@ -102,6 +102,8 @@ public class GameScreen extends Activity {
         theButton.setX(x);
         theButton.setY(y);
     }
+
+   //Called if user presses menu button or back button
     public void onPause(){
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
@@ -127,7 +129,7 @@ public class GameScreen extends Activity {
                 .show();
     }
 
-
+//Called when someone presses the pause button
     public void pauseClick(View a) {
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
@@ -152,7 +154,7 @@ public class GameScreen extends Activity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-
+//Allows user to restart the game or go to main menu
     public void endGame(){
         new AlertDialog.Builder(this)
                 .setTitle("Game Over!")
