@@ -97,7 +97,7 @@
         android:id="@+id/badIcon"
         android:src="@mipmap/badicon"
         android:background="@drawable/circlebutton2"
-        android:onClick="btnClick"
+        android:onClick="badClick"
         android:padding="10dp"
         android:layout_alignTop="@+id/gameButton"
         android:layout_alignParentLeft="true"
@@ -114,6 +114,7 @@
         android:layout_alignTop="@+id/badIcon"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:onClick="btnClick" />
 
 </RelativeLayout>

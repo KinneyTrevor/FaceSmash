@@ -27,7 +27,7 @@ public class GameScreen extends Activity {
     int timerValue = 60000; //change me back to 30,000
     final Context context = this;
     CountDownTimer mCountDownTimer;
-
+    String value;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,7 +40,7 @@ public class GameScreen extends Activity {
 
             Bundle extras = getIntent().getExtras();
                 if (extras != null) {
-                    String value = extras.getString("image");
+                    value = extras.getString("image");
                     ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
                     switch(value) {
                         case "icon1.png":
@@ -52,7 +52,7 @@ public class GameScreen extends Activity {
                             charButton.setImageDrawable(x);
                          //   charButton.setBackgroundResource(R.drawable.icon2);
                             break;
-                        case "icon.png3":
+                        case "icon3.png":
                             x = getResources().getDrawable(R.mipmap.icon3);
                             charButton.setImageDrawable(x);
                          //   charButton.setBackgroundResource(R.drawable.icon3);
@@ -74,6 +74,7 @@ public class GameScreen extends Activity {
 
 
         createCountDown(timerValue);
+        createBadTimer(timerValue);
         timerText = (TextView) findViewById(R.id.timerText);
         //BitmapDrawable bdrawable = new BitmapDrawable(photo);
         //ImageButton derp = (ImageButton) findViewById(R.id.iconButton);
@@ -104,6 +105,40 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
+    public void createBadTimer(int timerVal){
+        mCountDownTimer = new CountDownTimer(timerVal, 5000) {
+            public void onTick(long millisUntilFinished) {
+                badCreate();
+            }
+
+            public void onFinish() {
+            }
+        }.start();
+
+    }
+    public void badCreate(){
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
+        altbutton.setVisibility(View.VISIBLE);
+        altbutton.setClickable(true);
+        Random r2 = new Random();
+        int Button2H = r2.nextInt(width - 400);
+        int Button2W = r2.nextInt(height - 1650);
+        altbutton.setX(Button2H);
+        altbutton.setY(Button2W);
+        new CountDownTimer(1500, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                destroyBad();
+            }
+        }.start();
+    }
+
 //Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
     public void updateHS(int x) {
         SharedPreferences mypreferences = getSharedPreferences("App_preferences_file", Context.MODE_PRIVATE);
@@ -124,13 +159,28 @@ public class GameScreen extends Activity {
         userScore++;
         scoreText.setText(String.valueOf(userScore));
     }
+    public void destroyBad(){
+        ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
+        altbutton.setVisibility(View.GONE);
+        altbutton.setClickable(false);
+    }
+//Lowers score, time, flashes red
+    public void badClick(View v){
+        ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
+        altbutton.setVisibility(View.GONE);
+        altbutton.setClickable(false);
+        userScore=userScore-5;
+        scoreText = (TextView) findViewById(R.id.score);
+        scoreText.setText(String.valueOf(userScore  ));
+        timerValue = timerValue-2000;
+    }
 //Moves the actual button
     public void moveButton() {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
         ImageButton theButton = (ImageButton) findViewById(R.id.goodIcon);
-        ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
+
 
         //Button one
 
@@ -142,11 +192,7 @@ public class GameScreen extends Activity {
 
 
         //Button two - button
-        Random r2 = new Random();
-        int Button2H = r2.nextInt(width - 400);
-        int Button2W = r2.nextInt(height - 1650);
-        altbutton.setX(Button2H);
-        altbutton.setY(Button2W);
+
 //Drug addict code here...
         /*
         if(checkOverlap(Button1H, Button1W, Button2H, Button2W) == true) {
@@ -231,6 +277,7 @@ public class GameScreen extends Activity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent hs = new Intent(getApplicationContext(), GameScreen.class);
+                                hs.putExtra("image",value);
                                 startActivity(hs);
                                 dialog.cancel();
                             }
