@@ -44,7 +44,7 @@ public class GameScreen extends Activity {
 
 
         //TIMER FOR MOVING THE BUTTON AUTOMATICALLY
-        CountDownTimer z = new CountDownTimer(30000, 750) {
+        CountDownTimer z = new CountDownTimer(30000, 50) {
             public void onTick(long millisUntilFinished) {
                 moveButton();
             }
