@@ -54,7 +54,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name=".characterSlect"
+            android:name=".characterSelect"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_character_slect"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">

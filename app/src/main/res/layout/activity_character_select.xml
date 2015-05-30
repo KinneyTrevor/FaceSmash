@@ -11,8 +11,8 @@
         android:minHeight="150px"
         android:minWidth="150px"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/imageButton11"
-        android:src="@mipmap/hqdefault34"
+        android:layout_toStartOf="@+id/icon2"
+        android:src="@mipmap/icon1"
         android:maxHeight="150px"
         android:maxWidth="150px"
         android:background="@android:color/transparent"
@@ -21,42 +21,42 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton11"
+        android:id="@+id/icon2"
         android:minHeight="150px"
         android:minWidth="150px"
         android:layout_alignTop="@+id/icon1"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/badkinney"
+        android:src="@mipmap/icon2"
         android:background="@android:color/transparent" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton12"
-        android:src="@mipmap/gadget2"
-        android:background="@android:color/transparent"
-        android:layout_below="@+id/imageButton14"
-        android:layout_toLeftOf="@+id/imageButton13"
-        android:layout_toStartOf="@+id/imageButton13" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton13"
+        android:id="@+id/icon4"
         android:src="@mipmap/icon4"
-        android:layout_below="@+id/imageButton11"
-        android:layout_alignLeft="@+id/imageButton11"
-        android:layout_alignStart="@+id/imageButton11"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:layout_below="@+id/icon3"
+        android:layout_toLeftOf="@+id/icon5"
+        android:layout_toStartOf="@+id/icon5" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton14"
-        android:src="@mipmap/icon5"
+        android:id="@+id/icon5"
         android:background="@android:color/transparent"
-        android:layout_alignTop="@+id/imageButton11"
-        android:layout_toRightOf="@+id/imageButton11"
-        android:layout_toEndOf="@+id/imageButton11" />
+        android:layout_alignTop="@+id/icon4"
+        android:layout_alignRight="@+id/icon2"
+        android:layout_alignEnd="@+id/icon2"
+        android:src="@mipmap/icon5" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/icon3"
+        android:src="@mipmap/icon3"
+        android:background="@android:color/transparent"
+        android:layout_alignTop="@+id/icon2"
+        android:layout_toRightOf="@+id/icon2"
+        android:layout_toEndOf="@+id/icon2" />
 
 </RelativeLayout>
