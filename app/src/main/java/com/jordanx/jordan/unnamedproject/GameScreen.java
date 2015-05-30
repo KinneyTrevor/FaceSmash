@@ -7,7 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.Random;
 
 public class GameScreen extends Activity {
@@ -32,10 +34,44 @@ public class GameScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         //If this got started from activity_camera.java grab the photo that was passed with it
-        if (getIntent().hasExtra("byteArray")) {
-            photo = BitmapFactory.decodeByteArray(
-                    getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-        }
+        if (getIntent().hasExtra("image")) {
+           // photo = BitmapFactory.decodeByteArray(
+                   // getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+
+            Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("image");
+                    ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
+                    switch(value) {
+                        case "icon1.png":
+                            Drawable x = getResources().getDrawable(R.mipmap.icon1);
+                            charButton.setImageDrawable(x);
+                            break;
+                        case "icon2.png":
+                            x = getResources().getDrawable(R.mipmap.icon2);
+                            charButton.setImageDrawable(x);
+                         //   charButton.setBackgroundResource(R.drawable.icon2);
+                            break;
+                        case "icon.png3":
+                            x = getResources().getDrawable(R.mipmap.icon3);
+                            charButton.setImageDrawable(x);
+                         //   charButton.setBackgroundResource(R.drawable.icon3);
+                            break;
+                        case "icon4.png":
+                            x = getResources().getDrawable(R.mipmap.icon4);
+                            charButton.setImageDrawable(x);
+                         //   charButton.setBackgroundResource(R.drawable.icon4);
+                            break;
+                        case "icon5.png":
+                            x = getResources().getDrawable(R.mipmap.icon5);
+                            charButton.setImageDrawable(x);
+                          //  charButton.setBackgroundResource(R.drawable.icon5);
+                            break;
+                    }
+                }
+            }
+
+
 
         createCountDown(timerValue);
         timerText = (TextView) findViewById(R.id.timerText);
@@ -111,13 +147,15 @@ public class GameScreen extends Activity {
         int Button2W = r2.nextInt(height - 1650);
         altbutton.setX(Button2H);
         altbutton.setY(Button2W);
-
+//Drug addict code here...
+        /*
         if(checkOverlap(Button1H, Button1W, Button2H, Button2W) == true) {
             theButton.setX(Button1H+500);
             theButton.setY(Button1W+500);
             altbutton.setX(Button2H+500);
             altbutton.setY(Button2W+500);
         }
+        */
 
     }
     //Function to check overlap between buttons - Is kind of working but need to fix them crossing the border.. damn Mexicans

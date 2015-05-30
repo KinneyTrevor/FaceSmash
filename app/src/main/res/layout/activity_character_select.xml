@@ -7,16 +7,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/icon1"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="79dp"
         android:minHeight="150px"
         android:minWidth="150px"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/icon2"
         android:src="@mipmap/icon1"
         android:maxHeight="150px"
         android:maxWidth="150px"
         android:background="@android:color/transparent"
-        android:focusableInTouchMode="false" />
+        android:focusableInTouchMode="false"
+        android:onClick="onClick"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/icon2"
+        android:layout_toStartOf="@+id/icon2" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -27,17 +29,19 @@
         android:layout_alignTop="@+id/icon1"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/icon2"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:onClick="onClick" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/icon4"
-        android:src="@mipmap/icon4"
         android:background="@android:color/transparent"
         android:layout_below="@+id/icon3"
         android:layout_toLeftOf="@+id/icon5"
-        android:layout_toStartOf="@+id/icon5" />
+        android:layout_toStartOf="@+id/icon5"
+        android:onClick="onClick"
+        android:src="@mipmap/icon4" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -47,7 +51,8 @@
         android:layout_alignTop="@+id/icon4"
         android:layout_alignRight="@+id/icon2"
         android:layout_alignEnd="@+id/icon2"
-        android:src="@mipmap/icon5" />
+        android:src="@mipmap/icon5"
+        android:onClick="onClick" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -57,6 +62,7 @@
         android:background="@android:color/transparent"
         android:layout_alignTop="@+id/icon2"
         android:layout_toRightOf="@+id/icon2"
-        android:layout_toEndOf="@+id/icon2" />
+        android:layout_toEndOf="@+id/icon2"
+        android:onClick="onClick" />
 
 </RelativeLayout>
