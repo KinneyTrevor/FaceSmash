@@ -99,18 +99,19 @@ public class GameScreen extends Activity {
         //Button one
         Random r = new Random();
         int x = r.nextInt(width - 400);
-        int y = r.nextInt(height - 400);
+        int y = r.nextInt(height - 650);
         theButton.setX(x);
         theButton.setY(y);
 
         //Button two - button
         r = new Random();
         x = r.nextInt(width - 400);
-        y = r.nextInt(height - 400);
+        y = r.nextInt(height - 650);
         altbutton.setX(x);
         altbutton.setY(y);
 
     }
+    //Fuck you Jordan
 
    //Called if user presses menu button or back button
     public void onPause(){
