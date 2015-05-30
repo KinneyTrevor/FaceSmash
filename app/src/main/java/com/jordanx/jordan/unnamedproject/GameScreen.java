@@ -22,7 +22,7 @@ public class GameScreen extends Activity {
     Bitmap photo;
     TextView timerText;
     TextView scoreText;
-    int timerValue = 30000;
+    int timerValue = 60000; //change me back to 30,000
     final Context context = this;
     CountDownTimer mCountDownTimer;
 
@@ -44,7 +44,7 @@ public class GameScreen extends Activity {
 
 
         //TIMER FOR MOVING THE BUTTON AUTOMATICALLY
-        CountDownTimer z = new CountDownTimer(30000, 50) {
+        CountDownTimer z = new CountDownTimer(60000, 750) { //change me back 30,000/750 to make time reasonable
             public void onTick(long millisUntilFinished) {
                 moveButton();
             }
@@ -97,21 +97,41 @@ public class GameScreen extends Activity {
         ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
 
         //Button one
-        Random r = new Random();
-        int x = r.nextInt(width - 400);
-        int y = r.nextInt(height - 650);
-        theButton.setX(x);
-        theButton.setY(y);
+
+        Random r1 = new Random();
+        int Button1H = r1.nextInt(width - 400);
+        int Button1W = r1.nextInt(height - 1650);
+        theButton.setX(Button1H);
+        theButton.setY(Button1W);
+
 
         //Button two - button
-        r = new Random();
-        x = r.nextInt(width - 400);
-        y = r.nextInt(height - 650);
-        altbutton.setX(x);
-        altbutton.setY(y);
+        Random r2 = new Random();
+        int Button2H = r2.nextInt(width - 400);
+        int Button2W = r2.nextInt(height - 1650);
+        altbutton.setX(Button2H);
+        altbutton.setY(Button2W);
+
+        if(checkOverlap(Button1H, Button1W, Button2H, Button2W) == true) {
+            theButton.setX(Button1H+500);
+            theButton.setY(Button1W+500);
+            altbutton.setX(Button2H+500);
+            altbutton.setY(Button2W+500);
+        }
 
     }
-    //Fuck you Jordan
+    //Function to check overlap between buttons - Is kind of working but need to fix them crossing the border.. damn Mexicans
+    public boolean checkOverlap(int x1, int x2, int y1, int y2){
+        int Button1H = x1, Button1W = y1, Button2H = x2, Button2W = y2; //
+        if(Button1H <= Button2H + 250 && Button1H >= Button2H - 250  ){
+            return true;
+        }
+        else if (Button2H <= Button2H + 250 && Button2H >= Button2H - 250){
+            return true;
+        }
+
+        return false;
+    }
 
    //Called if user presses menu button or back button
     public void onPause(){
