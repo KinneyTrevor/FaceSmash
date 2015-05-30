@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}"
-    android:background="#00BCD4"
+
     android:id="@+id/gamescreen"
     android:padding="5dp"
     android:paddingLeft="5dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:paddingRight="5dp">
+    android:paddingRight="5dp"
+    android:background="@drawable/borderframe"
+    >
 
     <ImageButton
         android:layout_width="wrap_content"
