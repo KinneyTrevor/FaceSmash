@@ -114,6 +114,7 @@ public class GameScreen extends Activity {
 
    //Called if user presses menu button or back button
     public void onPause(){
+        super.onPause();
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
         }
