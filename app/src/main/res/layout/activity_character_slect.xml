@@ -35,9 +35,9 @@
         android:id="@+id/imageButton12"
         android:src="@mipmap/gadget2"
         android:background="@android:color/transparent"
-        android:layout_below="@+id/icon1"
-        android:layout_toLeftOf="@+id/imageButton11"
-        android:layout_toStartOf="@+id/imageButton11" />
+        android:layout_below="@+id/imageButton14"
+        android:layout_toLeftOf="@+id/imageButton13"
+        android:layout_toStartOf="@+id/imageButton13" />
 
     <ImageButton
         android:layout_width="wrap_content"
