@@ -239,7 +239,6 @@ public class GameScreen extends Activity {
                 .show();
 
     }
-
     //Called when someone presses the pause button
     public void pauseClick(View a) {
         if (mCountDownTimer != null) {
@@ -293,5 +292,4 @@ public class GameScreen extends Activity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-
 }
