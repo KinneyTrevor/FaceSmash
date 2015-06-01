@@ -81,7 +81,9 @@ public class GameScreen extends Activity {
         //TIMER FOR MOVING THE BUTTON AUTOMATICALLY
         CountDownTimer z = new CountDownTimer(60000, 650) { //change me back 30,000/750 to make time reasonable
             public void onTick(long millisUntilFinished) {
-                moveButton();
+                if (timerValue > 0) {
+                    moveButton();
+                }
             }
 
             public void onFinish() {
@@ -217,7 +219,7 @@ public class GameScreen extends Activity {
         }
         new AlertDialog.Builder(this)
                 .setTitle("Time Paused")
-                .setMessage("Would you like to restart the game?")
+                .setMessage("Would you like to resume the game?")
                 .setPositiveButton("Resume", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 createCountDown(timerValue);
@@ -232,8 +234,10 @@ public class GameScreen extends Activity {
                         dialog.cancel();
                     }
                 })
+                .setCancelable(false)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+
     }
 
     //Called when someone presses the pause button
@@ -258,11 +262,14 @@ public class GameScreen extends Activity {
                         dialog.cancel();
                     }
                 })
+                .setCancelable(false)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
     //Allows user to restart the game or go to main menu
     public void endGame(){
+        mCountDownTimer.cancel();
+        timerValue = 0;
         new AlertDialog.Builder(this)
                 .setTitle("Game Over!")
                 .setMessage("Would you like to play again?")
