@@ -24,15 +24,19 @@ public class GameScreen extends Activity {
     Bitmap photo;
     TextView timerText;
     TextView scoreText;
-    int timerValue = 60000; //change me back to 30,000
+    int timerValue = 10000; //change me back to 30,000
     final Context context = this;
     CountDownTimer mCountDownTimer;
+    Drawable x;
     String value;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
+        ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
+        x = getResources().getDrawable(R.mipmap.icon1);
+        charButton.setImageDrawable(x);
         //If this got started from activity_camera.java grab the photo that was passed with it
         if (getIntent().hasExtra("image")) {
            // photo = BitmapFactory.decodeByteArray(
@@ -41,10 +45,9 @@ public class GameScreen extends Activity {
             Bundle extras = getIntent().getExtras();
                 if (extras != null) {
                     value = extras.getString("image");
-                    ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
                     switch(value) {
                         case "icon1.png":
-                            Drawable x = getResources().getDrawable(R.mipmap.icon1);
+                            x = getResources().getDrawable(R.mipmap.icon1);
                             charButton.setImageDrawable(x);
                             break;
                         case "icon2.png":
@@ -71,17 +74,12 @@ public class GameScreen extends Activity {
                 }
             }
 
-
-
         createCountDown(timerValue);
         createBadTimer(timerValue);
         timerText = (TextView) findViewById(R.id.timerText);
-        //BitmapDrawable bdrawable = new BitmapDrawable(photo);
-        //ImageButton derp = (ImageButton) findViewById(R.id.iconButton);
-
 
         //TIMER FOR MOVING THE BUTTON AUTOMATICALLY
-        CountDownTimer z = new CountDownTimer(60000, 750) { //change me back 30,000/750 to make time reasonable
+        CountDownTimer z = new CountDownTimer(60000, 650) { //change me back 30,000/750 to make time reasonable
             public void onTick(long millisUntilFinished) {
                 moveButton();
             }
@@ -105,16 +103,15 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
+
     public void createBadTimer(int timerVal){
-        mCountDownTimer = new CountDownTimer(timerVal, 5000) {
+        mCountDownTimer = new CountDownTimer(timerVal, 2500) {
             public void onTick(long millisUntilFinished) {
                 badCreate();
             }
-
             public void onFinish() {
             }
         }.start();
-
     }
     public void badCreate(){
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
@@ -125,14 +122,12 @@ public class GameScreen extends Activity {
         altbutton.setClickable(true);
         Random r2 = new Random();
         int Button2H = r2.nextInt(width - 400);
-        int Button2W = r2.nextInt(height - 1650);
+        int Button2W = r2.nextInt(height - 400);
         altbutton.setX(Button2H);
         altbutton.setY(Button2W);
-        new CountDownTimer(1500, 1000) {
-
+        new CountDownTimer(3000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
-
             public void onFinish() {
                 destroyBad();
             }
@@ -155,6 +150,9 @@ public class GameScreen extends Activity {
     }
 //Increments user score.
     public void btnClick(View v) {
+        Drawable z = getResources().getDrawable(R.mipmap.redsplat);
+        ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
+        charButton.setImageDrawable(z);
         scoreText = (TextView) findViewById(R.id.score);
         userScore++;
         scoreText.setText(String.valueOf(userScore));
@@ -169,29 +167,25 @@ public class GameScreen extends Activity {
         ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
         altbutton.setVisibility(View.GONE);
         altbutton.setClickable(false);
-        userScore=userScore-5;
+        userScore=userScore-3;
         scoreText = (TextView) findViewById(R.id.score);
         scoreText.setText(String.valueOf(userScore  ));
         timerValue = timerValue-2000;
     }
 //Moves the actual button
     public void moveButton() {
+        ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
+        charButton.setImageDrawable(x);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
         ImageButton theButton = (ImageButton) findViewById(R.id.goodIcon);
 
-
-        //Button one
-
         Random r1 = new Random();
         int Button1H = r1.nextInt(width - 400);
-        int Button1W = r1.nextInt(height - 1650);
+        int Button1W = r1.nextInt(height - 400);
         theButton.setX(Button1H);
         theButton.setY(Button1W);
-
-
-        //Button two - button
 
 //Drug addict code here...
         /*
@@ -202,7 +196,6 @@ public class GameScreen extends Activity {
             altbutton.setY(Button2W+500);
         }
         */
-
     }
     //Function to check overlap between buttons - Is kind of working but need to fix them crossing the border.. damn Mexicans
     public boolean checkOverlap(int x1, int x2, int y1, int y2){
@@ -213,7 +206,6 @@ public class GameScreen extends Activity {
         else if (Button2H <= Button2H + 250 && Button2H >= Button2H - 250){
             return true;
         }
-
         return false;
     }
 
