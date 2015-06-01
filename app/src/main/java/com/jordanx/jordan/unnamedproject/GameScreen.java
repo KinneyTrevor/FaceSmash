@@ -24,64 +24,62 @@ public class GameScreen extends Activity {
     Bitmap photo;
     TextView timerText;
     TextView scoreText;
-    int timerValue = 60000; //change me back to 30,000
+    int timerValue = 30000; //change me back to 30,000
     final Context context = this;
     CountDownTimer mCountDownTimer;
+    Drawable x;
     String value;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
+        ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
+        x = getResources().getDrawable(R.drawable.icon1);
+        charButton.setImageDrawable(x);
         //If this got started from activity_camera.java grab the photo that was passed with it
         if (getIntent().hasExtra("image")) {
-           // photo = BitmapFactory.decodeByteArray(
-                   // getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+            // photo = BitmapFactory.decodeByteArray(
+            // getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
 
             Bundle extras = getIntent().getExtras();
-                if (extras != null) {
-                    value = extras.getString("image");
-                    ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
-                    switch(value) {
-                        case "icon1.png":
-                            Drawable x = getResources().getDrawable(R.mipmap.icon1);
-                            charButton.setImageDrawable(x);
-                            break;
-                        case "icon2.png":
-                            x = getResources().getDrawable(R.mipmap.icon2);
-                            charButton.setImageDrawable(x);
-                         //   charButton.setBackgroundResource(R.drawable.icon2);
-                            break;
-                        case "icon3.png":
-                            x = getResources().getDrawable(R.mipmap.icon3);
-                            charButton.setImageDrawable(x);
-                         //   charButton.setBackgroundResource(R.drawable.icon3);
-                            break;
-                        case "icon4.png":
-                            x = getResources().getDrawable(R.mipmap.icon4);
-                            charButton.setImageDrawable(x);
-                         //   charButton.setBackgroundResource(R.drawable.icon4);
-                            break;
-                        case "icon5.png":
-                            x = getResources().getDrawable(R.mipmap.icon5);
-                            charButton.setImageDrawable(x);
-                          //  charButton.setBackgroundResource(R.drawable.icon5);
-                            break;
-                    }
+            if (extras != null) {
+                value = extras.getString("image");
+                switch(value) {
+                    case "icon1.png":
+                        x = getResources().getDrawable(R.mipmap.icon1);
+                        charButton.setImageDrawable(x);
+                        break;
+                    case "icon2.png":
+                        x = getResources().getDrawable(R.mipmap.icon2);
+                        charButton.setImageDrawable(x);
+                        //   charButton.setBackgroundResource(R.drawable.icon2);
+                        break;
+                    case "icon3.png":
+                        x = getResources().getDrawable(R.mipmap.icon3);
+                        charButton.setImageDrawable(x);
+                        //   charButton.setBackgroundResource(R.drawable.icon3);
+                        break;
+                    case "icon4.png":
+                        x = getResources().getDrawable(R.mipmap.icon4);
+                        charButton.setImageDrawable(x);
+                        //   charButton.setBackgroundResource(R.drawable.icon4);
+                        break;
+                    case "icon5.png":
+                        x = getResources().getDrawable(R.mipmap.icon5);
+                        charButton.setImageDrawable(x);
+                        //  charButton.setBackgroundResource(R.drawable.icon5);
+                        break;
                 }
             }
-
-
+        }
 
         createCountDown(timerValue);
         createBadTimer(timerValue);
         timerText = (TextView) findViewById(R.id.timerText);
-        //BitmapDrawable bdrawable = new BitmapDrawable(photo);
-        //ImageButton derp = (ImageButton) findViewById(R.id.iconButton);
-
 
         //TIMER FOR MOVING THE BUTTON AUTOMATICALLY
-        CountDownTimer z = new CountDownTimer(60000, 750) { //change me back 30,000/750 to make time reasonable
+        CountDownTimer z = new CountDownTimer(60000, 650) { //change me back 30,000/750 to make time reasonable
             public void onTick(long millisUntilFinished) {
                 moveButton();
             }
@@ -90,9 +88,9 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
-//This is the main time count down at the top of the screen
+    //This is the main time count down at the top of the screen
     public void createCountDown(int timerVal){
-       mCountDownTimer = new CountDownTimer(timerVal, 1000) {
+        mCountDownTimer = new CountDownTimer(timerVal, 1000) {
             public void onTick(long millisUntilFinished) {
                 timerText.setText("" + millisUntilFinished / 1000);
                 String z = timerText.getText().toString();
@@ -105,16 +103,15 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
+
     public void createBadTimer(int timerVal){
-        mCountDownTimer = new CountDownTimer(timerVal, 5000) {
+        mCountDownTimer = new CountDownTimer(timerVal, 2500) {
             public void onTick(long millisUntilFinished) {
                 badCreate();
             }
-
             public void onFinish() {
             }
         }.start();
-
     }
     public void badCreate(){
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
@@ -125,21 +122,19 @@ public class GameScreen extends Activity {
         altbutton.setClickable(true);
         Random r2 = new Random();
         int Button2H = r2.nextInt(width - 400);
-        int Button2W = r2.nextInt(height - 1650);
+        int Button2W = r2.nextInt(height - 400);
         altbutton.setX(Button2H);
         altbutton.setY(Button2W);
-        new CountDownTimer(1500, 1000) {
-
+        new CountDownTimer(3000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
-
             public void onFinish() {
                 destroyBad();
             }
         }.start();
     }
 
-//Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
+    //Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
     public void updateHS(int x) {
         SharedPreferences mypreferences = getSharedPreferences("App_preferences_file", Context.MODE_PRIVATE);
         int currentHS = mypreferences.getInt("highscore", 0);
@@ -153,8 +148,11 @@ public class GameScreen extends Activity {
             endGame();
         }
     }
-//Increments user score.
+    //Increments user score.
     public void btnClick(View v) {
+        Drawable z = getResources().getDrawable(R.mipmap.splat);
+        ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
+        charButton.setImageDrawable(z);
         scoreText = (TextView) findViewById(R.id.score);
         userScore++;
         scoreText.setText(String.valueOf(userScore));
@@ -164,34 +162,30 @@ public class GameScreen extends Activity {
         altbutton.setVisibility(View.GONE);
         altbutton.setClickable(false);
     }
-//Lowers score, time, flashes red
+    //Lowers score, time, flashes red
     public void badClick(View v){
         ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
         altbutton.setVisibility(View.GONE);
         altbutton.setClickable(false);
-        userScore=userScore-5;
+        userScore=userScore-3;
         scoreText = (TextView) findViewById(R.id.score);
         scoreText.setText(String.valueOf(userScore  ));
         timerValue = timerValue-2000;
     }
-//Moves the actual button
+    //Moves the actual button
     public void moveButton() {
+        ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
+        charButton.setImageDrawable(x);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
         ImageButton theButton = (ImageButton) findViewById(R.id.goodIcon);
 
-
-        //Button one
-
         Random r1 = new Random();
         int Button1H = r1.nextInt(width - 400);
-        int Button1W = r1.nextInt(height - 1650);
+        int Button1W = r1.nextInt(height - 400);
         theButton.setX(Button1H);
         theButton.setY(Button1W);
-
-
-        //Button two - button
 
 //Drug addict code here...
         /*
@@ -202,7 +196,6 @@ public class GameScreen extends Activity {
             altbutton.setY(Button2W+500);
         }
         */
-
     }
     //Function to check overlap between buttons - Is kind of working but need to fix them crossing the border.. damn Mexicans
     public boolean checkOverlap(int x1, int x2, int y1, int y2){
@@ -213,11 +206,10 @@ public class GameScreen extends Activity {
         else if (Button2H <= Button2H + 250 && Button2H >= Button2H - 250){
             return true;
         }
-
         return false;
     }
-//asdfasdf
-   //Called if user presses menu button or back button
+
+    //Called if user presses menu button or back button
     public void onPause(){
         super.onPause();
         if (mCountDownTimer != null) {
@@ -244,7 +236,7 @@ public class GameScreen extends Activity {
                 .show();
     }
 
-//Called when someone presses the pause button
+    //Called when someone presses the pause button
     public void pauseClick(View a) {
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
@@ -269,7 +261,7 @@ public class GameScreen extends Activity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-//Allows user to restart the game or go to main menu
+    //Allows user to restart the game or go to main menu
     public void endGame(){
         new AlertDialog.Builder(this)
                 .setTitle("Game Over!")
