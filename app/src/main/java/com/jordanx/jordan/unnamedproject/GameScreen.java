@@ -157,14 +157,11 @@ public class GameScreen extends Activity {
 
         new CountDownTimer(3000, 1000){
             public void onTick(long millisUntilFinished){
-
             }
             public void onFinish(){
                 destroyBad();
             }
-
         }.start();
-
     }
 
     //Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
