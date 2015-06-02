@@ -16,7 +16,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import java.util.Random;
 
 public class GameScreen extends Activity {
@@ -34,6 +35,9 @@ public class GameScreen extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
         x = getResources().getDrawable(R.drawable.icon1);
         charButton.setImageDrawable(x);
