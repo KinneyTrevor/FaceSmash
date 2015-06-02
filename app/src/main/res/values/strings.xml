@@ -3,16 +3,9 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-
     <string name="title_activity_camera">cameraActivity</string>
-
     <string name="title_activity_game_screen">GameScreen</string>
-
     <string name="title_activity_splash">Splash</string>
-
-    <string name="title_activity_galery">Galery</string>
-
     <string name="title_activity_gallery">Gallery</string>
-
-    <string name="title_activity_character_slect">characterSlect</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>
