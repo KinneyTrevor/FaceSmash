@@ -12,16 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Project X"
+        android:text="Face Smash"
         android:id="@+id/titleView"
         android:textColor="#B2EBF2"
         android:textSize="50dp"
         android:textIsSelectable="false"
         android:textStyle="bold"
-        android:layout_above="@+id/takePictureButton"
-        android:layout_alignLeft="@+id/takePictureButton"
-        android:layout_alignStart="@+id/takePictureButton"
-        android:layout_marginBottom="49dp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"

@@ -48,11 +48,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/icon5"
         android:background="@android:color/transparent"
-        android:layout_alignTop="@+id/icon4"
+        android:src="@mipmap/icon5"
+        android:onClick="onClick"
         android:layout_alignRight="@+id/icon2"
         android:layout_alignEnd="@+id/icon2"
-        android:src="@mipmap/icon5"
-        android:onClick="onClick" />
+        android:layout_below="@+id/icon1" />
 
     <ImageButton
         android:layout_width="wrap_content"
