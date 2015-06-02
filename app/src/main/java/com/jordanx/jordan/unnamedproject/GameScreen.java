@@ -268,6 +268,7 @@ public class GameScreen extends Activity {
                 .show();
 
     }
+    //nochange
     //Called when someone presses the pause button
     public void pauseClick(View a) {
         if (mCountDownTimer != null) {
