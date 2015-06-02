@@ -160,7 +160,7 @@ public class GameScreen extends Activity {
 
             }
             public void onFinish(){
-                destroyBad();
+                destroyCoin();
             }
 
         }.start();
@@ -194,6 +194,11 @@ public class GameScreen extends Activity {
         ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
         altbutton.setVisibility(View.GONE);
         altbutton.setClickable(false);
+    }
+    public void destroyCoin(){
+        ImageButton coinButton = (ImageButton) findViewById(R.id.badIcon);
+        coinButton.setVisibility(View.GONE);
+        coinButton.setClickable(false);
     }
     //Lowers score, time, flashes red
     public void badClick(View v){
@@ -230,6 +235,14 @@ public class GameScreen extends Activity {
             altbutton.setY(Button2W+500);
         }
         */
+    }
+    public void moveCoin(){
+        ImageButton charButton = (ImageButton) findViewById(R.id.coinButton);
+        charButton.setImageDrawable(x);
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
     }
     //Function to check overlap between buttons - Is kind of working but need to fix them crossing the border.. damn Mexicans
     public boolean checkOverlap(int x1, int x2, int y1, int y2){
@@ -304,6 +317,8 @@ public class GameScreen extends Activity {
         new AlertDialog.Builder(this)
                 .setTitle("Game Over!")
                 .setMessage("Would you like to play again?")
+                .setCancelable(false)
+
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent hs = new Intent(getApplicationContext(), GameScreen.class);
