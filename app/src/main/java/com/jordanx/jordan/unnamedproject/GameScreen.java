@@ -116,6 +116,7 @@ public class GameScreen extends Activity {
         }.start();
 
     }
+    //This is the bad button
     public void badCreate(){
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
@@ -216,7 +217,7 @@ public class GameScreen extends Activity {
 
         return false;
     }
-//asdfasdf
+
    //Called if user presses menu button or back button
     public void onPause(){
         super.onPause();
