@@ -135,6 +135,33 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
+    //Magic coin button
+    public void coinButton(){
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        ImageButton coinButton = (ImageButton) findViewById(R.id.coinButton);
+        coinButton.setVisibility(View.VISIBLE);
+        coinButton.setClickable(true);
+
+        Random r3 = new Random();
+        int Button3H = r3.nextInt(width - 400);
+        int Button3W = r3.nextInt(height - 400);
+
+        coinButton.setX(Button3H);
+        coinButton.setY(Button3W);
+
+        new CountDownTimer(3000, 1000){
+            public void onTick(long millisUntilFinished){
+
+            }
+            public void onFinish(){
+                destroyBad();
+            }
+
+        }.start();
+
+    }
 
     //Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
     public void updateHS(int x) {
@@ -174,6 +201,7 @@ public class GameScreen extends Activity {
         scoreText.setText(String.valueOf(userScore  ));
         timerValue = timerValue-2000;
     }
+
     //Moves the actual button
     public void moveButton() {
         ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
