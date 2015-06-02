@@ -81,7 +81,7 @@ public class GameScreen extends Activity {
         createCountDown(timerValue);
         createBadTimer(timerValue);
         timerText = (TextView) findViewById(R.id.timerText);
-
+        ImageButton stupidButton = (ImageButton) findViewById(R.id.coinButton);
         //TIMER FOR MOVING THE BUTTON AUTOMATICALLY
         CountDownTimer z = new CountDownTimer(60000, 650) { //change me back 30,000/750 to make time reasonable
             public void onTick(long millisUntilFinished) {
