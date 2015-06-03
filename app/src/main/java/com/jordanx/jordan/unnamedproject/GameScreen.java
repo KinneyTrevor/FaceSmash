@@ -157,14 +157,11 @@ public class GameScreen extends Activity {
 
         new CountDownTimer(3000, 1000){
             public void onTick(long millisUntilFinished){
-
             }
             public void onFinish(){
                 destroyCoin();
             }
-
         }.start();
-
     }
 
     //Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
@@ -284,6 +281,7 @@ public class GameScreen extends Activity {
                 .show();
 
     }
+    //nochange
     //Called when someone presses the pause button
     public void pauseClick(View a) {
         if (mCountDownTimer != null) {
