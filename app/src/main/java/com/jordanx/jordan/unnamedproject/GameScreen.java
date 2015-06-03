@@ -28,6 +28,7 @@ public class GameScreen extends Activity {
     int timerValue = 30000; //change me back to 30,000
     final Context context = this;
     CountDownTimer mCountDownTimer;
+    CountDownTimer coinTimer;
     Drawable x;
     String value;
     @Override
@@ -41,6 +42,17 @@ public class GameScreen extends Activity {
         ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
         x = getResources().getDrawable(R.drawable.icon1);
         charButton.setImageDrawable(x);
+        CountDownTimer createCoin = new CountDownTimer(600000, 5000) { //change me back 30,000/750 to make time reasonable
+            public void onTick(long millisUntilFinished) {
+                if (timerValue > 0) {
+                    createCoin();
+                    //moveCoin();
+                }
+            }
+
+            public void onFinish() {
+            }
+        }.start();
         //If this got started from activity_camera.java grab the photo that was passed with it
         if (getIntent().hasExtra("image")) {
             // photo = BitmapFactory.decodeByteArray(
@@ -87,14 +99,13 @@ public class GameScreen extends Activity {
             public void onTick(long millisUntilFinished) {
                 if (timerValue > 0) {
                     moveButton();
-                    moveCoin();//Need to move this, possibly centralize all the moving buttons in one function?
+                    //moveCoin();
                 }
             }
 
             public void onFinish() {
             }
         }.start();
-
     }
     //This is the main time count down at the top of the screen
     public void createCountDown(int timerVal){
@@ -141,43 +152,27 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
-    //Magic coin button
-    public void coinButton(){
+//Creates the coin
+    public void createCoin(){
+        coinTimer.cancel();
+        ImageButton coinButton = (ImageButton) findViewById(R.id.coinButton);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
-        ImageButton coinButton = (ImageButton) findViewById(R.id.coinButton);
-        coinButton.setVisibility(View.VISIBLE);
-        coinButton.setClickable(true);
-
         Random r3 = new Random();
         int Button3H = r3.nextInt(width - 400);
         int Button3W = r3.nextInt(height - 400);
-
         coinButton.setX(Button3H);
         coinButton.setY(Button3W);
-
-        new CountDownTimer(3000, 1000){
+        coinButton.setVisibility(View.VISIBLE);
+        coinButton.setClickable(true);
+        coinTimer = new CountDownTimer(4000, 1000){
             public void onTick(long millisUntilFinished){
             }
             public void onFinish(){
                 destroyCoin();
             }
         }.start();
-    }
-    public void moveCoin(){
-        ImageButton charButton = (ImageButton) findViewById(R.id.coinButton);
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
-        ImageButton coinButton = (ImageButton) findViewById(R.id.coinButton);
-
-        Random r3 = new Random();
-        int Button3H = r3.nextInt(width - 400);
-        int Button3W = r3.nextInt(height - 400);
-        coinButton.setX(Button3H);
-        coinButton.setY(Button3W);
-
     }
 
     //Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
@@ -194,6 +189,7 @@ public class GameScreen extends Activity {
             endGame();
         }
     }
+
     //Increments user score.
     public void btnClick(View v) {
         Drawable z = getResources().getDrawable(R.mipmap.splat);
@@ -203,11 +199,13 @@ public class GameScreen extends Activity {
         userScore++;
         scoreText.setText(String.valueOf(userScore));
     }
+
     public void destroyBad(){
         ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
         altbutton.setVisibility(View.GONE);
         altbutton.setClickable(false);
     }
+
     public void destroyCoin(){
         ImageButton coinButton = (ImageButton) findViewById(R.id.badIcon);
         coinButton.setVisibility(View.GONE);
@@ -288,9 +286,8 @@ public class GameScreen extends Activity {
                 .setCancelable(false)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-
     }
-    //nochange
+
     //Called when someone presses the pause button
     public void pauseClick(View a) {
         if (mCountDownTimer != null) {
@@ -317,6 +314,7 @@ public class GameScreen extends Activity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
     //Allows user to restart the game or go to main menu
     public void endGame(){
         mCountDownTimer.cancel();
@@ -325,7 +323,6 @@ public class GameScreen extends Activity {
                 .setTitle("Game Over!")
                 .setMessage("Would you like to play again?")
                 .setCancelable(false)
-
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent hs = new Intent(getApplicationContext(), GameScreen.class);
