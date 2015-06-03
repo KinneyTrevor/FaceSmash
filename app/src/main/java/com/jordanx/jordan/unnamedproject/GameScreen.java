@@ -87,13 +87,14 @@ public class GameScreen extends Activity {
             public void onTick(long millisUntilFinished) {
                 if (timerValue > 0) {
                     moveButton();
-                    moveCoin();
+                    moveCoin();//Need to move this, possibly centralize all the moving buttons in one function?
                 }
             }
 
             public void onFinish() {
             }
         }.start();
+
     }
     //This is the main time count down at the top of the screen
     public void createCountDown(int timerVal){
@@ -166,7 +167,6 @@ public class GameScreen extends Activity {
     }
     public void moveCoin(){
         ImageButton charButton = (ImageButton) findViewById(R.id.coinButton);
-        charButton.setImageDrawable(x);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
