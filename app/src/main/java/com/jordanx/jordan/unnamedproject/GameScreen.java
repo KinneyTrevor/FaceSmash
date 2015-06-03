@@ -87,6 +87,7 @@ public class GameScreen extends Activity {
             public void onTick(long millisUntilFinished) {
                 if (timerValue > 0) {
                     moveButton();
+                    moveCoin();
                 }
             }
 
@@ -163,6 +164,21 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
+    public void moveCoin(){
+        ImageButton charButton = (ImageButton) findViewById(R.id.coinButton);
+        charButton.setImageDrawable(x);
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        ImageButton coinButton = (ImageButton) findViewById(R.id.coinButton);
+
+        Random r3 = new Random();
+        int Button3H = r3.nextInt(width - 400);
+        int Button3W = r3.nextInt(height - 400);
+        coinButton.setX(Button3H);
+        coinButton.setY(Button3W);
+
+    }
 
     //Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
     public void updateHS(int x) {
@@ -232,15 +248,8 @@ public class GameScreen extends Activity {
             altbutton.setY(Button2W+500);
         }
         */
-    }//asdf?
-    public void moveCoin(){ //TODO
-        ImageButton charButton = (ImageButton) findViewById(R.id.coinButton);
-        charButton.setImageDrawable(x);
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
-
     }
+
     //Function to check overlap between buttons - Is kind of working but need to fix them crossing the border.. damn Mexicans
     public boolean checkOverlap(int x1, int x2, int y1, int y2){
         int Button1H = x1, Button1W = y1, Button2H = x2, Button2W = y2; //
