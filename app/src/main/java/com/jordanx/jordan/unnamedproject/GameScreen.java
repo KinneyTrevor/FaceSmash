@@ -235,8 +235,8 @@ public class GameScreen extends Activity {
             altbutton.setY(Button2W+500);
         }
         */
-    }
-    public void moveCoin(){
+    }//asdf?
+    public void moveCoin(){ //TODO
         ImageButton charButton = (ImageButton) findViewById(R.id.coinButton);
         charButton.setImageDrawable(x);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
