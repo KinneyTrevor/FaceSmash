@@ -173,7 +173,6 @@ public class GameScreen extends Activity {
                 destroyCoin();
             }
         }.start();
-
     }
 
     //Called at the end of the game, grabs the highscore and compares it to the current highscore, if bigger it updates, if less just goes to quit
@@ -190,6 +189,7 @@ public class GameScreen extends Activity {
             endGame();
         }
     }
+
     //Increments user score.
     public void btnClick(View v) {
         Drawable z = getResources().getDrawable(R.mipmap.splat);
@@ -199,11 +199,13 @@ public class GameScreen extends Activity {
         userScore++;
         scoreText.setText(String.valueOf(userScore));
     }
+
     public void destroyBad(){
         ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
         altbutton.setVisibility(View.GONE);
         altbutton.setClickable(false);
     }
+
     public void destroyCoin(){
         ImageButton coinButton = (ImageButton) findViewById(R.id.badIcon);
         coinButton.setVisibility(View.GONE);
@@ -284,9 +286,8 @@ public class GameScreen extends Activity {
                 .setCancelable(false)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-
     }
-    //nochange
+
     //Called when someone presses the pause button
     public void pauseClick(View a) {
         if (mCountDownTimer != null) {
@@ -313,6 +314,7 @@ public class GameScreen extends Activity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
     //Allows user to restart the game or go to main menu
     public void endGame(){
         mCountDownTimer.cancel();
@@ -321,7 +323,6 @@ public class GameScreen extends Activity {
                 .setTitle("Game Over!")
                 .setMessage("Would you like to play again?")
                 .setCancelable(false)
-
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent hs = new Intent(getApplicationContext(), GameScreen.class);
