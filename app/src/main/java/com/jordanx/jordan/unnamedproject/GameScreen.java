@@ -120,7 +120,7 @@ public class GameScreen extends Activity {
             public void onFinish() {
             }
         }.start();
-    }
+    }//1
     public void badCreate(){
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
