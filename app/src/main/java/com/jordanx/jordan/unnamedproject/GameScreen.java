@@ -29,6 +29,7 @@ public class GameScreen extends Activity {
     final Context context = this;
     CountDownTimer mCountDownTimer;
     CountDownTimer coinTimer;
+    boolean isRunning = false;
     Drawable x;
     String value;
     @Override
@@ -154,7 +155,8 @@ public class GameScreen extends Activity {
     }
 //Creates the coin
     public void createCoin(){
-        coinTimer.cancel();
+        if (isRunning == true){
+        coinTimer.cancel();}
         ImageButton coinButton = (ImageButton) findViewById(R.id.coinButton);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
@@ -168,6 +170,7 @@ public class GameScreen extends Activity {
         coinButton.setClickable(true);
         coinTimer = new CountDownTimer(4000, 1000){
             public void onTick(long millisUntilFinished){
+                isRunning = true;
             }
             public void onFinish(){
                 destroyCoin();
@@ -326,7 +329,7 @@ public class GameScreen extends Activity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent hs = new Intent(getApplicationContext(), GameScreen.class);
-                                hs.putExtra("image",value);
+                                hs.putExtra("image", value);
                                 startActivity(hs);
                                 dialog.cancel();
                             }
