@@ -25,7 +25,7 @@ public class GameScreen extends Activity {
     Bitmap photo;
     TextView timerText;
     TextView scoreText;
-    int timerValue = 30000; //change me back to 30,000
+    int timerValue = 30000;
     final Context context = this;
     CountDownTimer mCountDownTimer;
     CountDownTimer coinTimer;
