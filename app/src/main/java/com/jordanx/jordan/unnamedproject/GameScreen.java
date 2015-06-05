@@ -2,20 +2,26 @@ package com.jordanx.jordan.unnamedproject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import java.util.Random;
@@ -27,16 +33,23 @@ public class GameScreen extends Activity {
     TextView scoreText;
     int timerValue = 30000;
     final Context context = this;
+    CountDownTimer moveTimer;
     CountDownTimer mCountDownTimer;
     CountDownTimer coinTimer;
+    CountDownTimer lifeTimer;
+    int timefactor = 1000;
+    int lifeCount = 3;
     boolean isRunning = false;
     Drawable x;
+
+
     String value;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -47,7 +60,6 @@ public class GameScreen extends Activity {
             public void onTick(long millisUntilFinished) {
                 if (timerValue > 0) {
                     createCoin();
-                    //moveCoin();
                 }
             }
 
@@ -56,9 +68,6 @@ public class GameScreen extends Activity {
         }.start();
         //If this got started from activity_camera.java grab the photo that was passed with it
         if (getIntent().hasExtra("image")) {
-            // photo = BitmapFactory.decodeByteArray(
-            // getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 value = extras.getString("image");
@@ -70,37 +79,39 @@ public class GameScreen extends Activity {
                     case "icon2.png":
                         x = getResources().getDrawable(R.mipmap.icon2);
                         charButton.setImageDrawable(x);
-                        //   charButton.setBackgroundResource(R.drawable.icon2);
                         break;
                     case "icon3.png":
                         x = getResources().getDrawable(R.mipmap.icon3);
                         charButton.setImageDrawable(x);
-                        //   charButton.setBackgroundResource(R.drawable.icon3);
                         break;
                     case "icon4.png":
                         x = getResources().getDrawable(R.mipmap.icon4);
                         charButton.setImageDrawable(x);
-                        //   charButton.setBackgroundResource(R.drawable.icon4);
                         break;
                     case "icon5.png":
                         x = getResources().getDrawable(R.mipmap.icon5);
                         charButton.setImageDrawable(x);
-                        //  charButton.setBackgroundResource(R.drawable.icon5);
                         break;
                 }
             }
         }
-
-        createCountDown(timerValue);
         createBadTimer(timerValue);
         timerText = (TextView) findViewById(R.id.timerText);
         ImageButton stupidButton = (ImageButton) findViewById(R.id.coinButton);
+        //sets the countdown to track lives
+        lifeTimer = new CountDownTimer(timefactor,1){
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                    loseLife();
+            }
+        }.start();
         //TIMER FOR MOVING THE BUTTON AUTOMATICALLY
-        CountDownTimer z = new CountDownTimer(60000, 650) { //change me back 30,000/750 to make time reasonable
+        moveTimer = new CountDownTimer(60000, timefactor) {
             public void onTick(long millisUntilFinished) {
                 if (timerValue > 0) {
                     moveButton();
-                    //moveCoin();
                 }
             }
 
@@ -108,21 +119,37 @@ public class GameScreen extends Activity {
             }
         }.start();
     }
-    //This is the main time count down at the top of the screen
-    public void createCountDown(int timerVal){
-        mCountDownTimer = new CountDownTimer(timerVal, 1000) {
+
+    public void loseLife(){
+        timerText = (TextView) findViewById(R.id.timerText);
+        timerText.setText(""+lifeCount);
+        lifeCount--;
+        lifeTimer = new CountDownTimer(timefactor,1){
             public void onTick(long millisUntilFinished) {
-                timerText.setText("" + millisUntilFinished / 1000);
-                String z = timerText.getText().toString();
-                timerValue = (Integer.parseInt(z)) * 1000;
             }
 
             public void onFinish() {
-                timerText.setText("" + 0);
-                updateHS(userScore);
+
+                    loseLife();
+
+            }
+        }.start();
+
+    }
+
+    public void updateTimeFactor(){
+        moveTimer.cancel();
+        moveTimer = new CountDownTimer(60000, timefactor) {
+            public void onTick(long millisUntilFinished) {
+                if (timerValue > 0) {
+                    moveButton();
+                }
+            }
+            public void onFinish() {
             }
         }.start();
     }
+
 
     public void createBadTimer(int timerVal){
         mCountDownTimer = new CountDownTimer(timerVal, 2500) {
@@ -201,6 +228,19 @@ public class GameScreen extends Activity {
         scoreText = (TextView) findViewById(R.id.score);
         userScore++;
         scoreText.setText(String.valueOf(userScore));
+        if (timefactor >= 700) {timefactor =  timefactor - 10;}
+        if (timefactor <700){ timefactor = timefactor - 5; }
+        updateTimeFactor();
+        lifeTimer.cancel();
+        lifeTimer = new CountDownTimer(timefactor,1){
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                loseLife();
+            }
+        }.start();
+
     }
 
     public void destroyBad(){
@@ -242,35 +282,12 @@ public class GameScreen extends Activity {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
-        ImageButton theButton = (ImageButton) findViewById(R.id.goodIcon);
 
         Random r1 = new Random();
         int Button1H = r1.nextInt(width - 400);
         int Button1W = r1.nextInt(height - 400);
-        theButton.setX(Button1H);
-        theButton.setY(Button1W);
-
-//Drug addict code here...
-        /*
-        if(checkOverlap(Button1H, Button1W, Button2H, Button2W) == true) {
-            theButton.setX(Button1H+500);
-            theButton.setY(Button1W+500);
-            altbutton.setX(Button2H+500);
-            altbutton.setY(Button2W+500);
-        }
-        */
-    }
-
-    //Function to check overlap between buttons - Is kind of working but need to fix them crossing the border.. damn Mexicans
-    public boolean checkOverlap(int x1, int x2, int y1, int y2){
-        int Button1H = x1, Button1W = y1, Button2H = x2, Button2W = y2; //
-        if(Button1H <= Button2H + 250 && Button1H >= Button2H - 250  ){
-            return true;
-        }
-        else if (Button2H <= Button2H + 250 && Button2H >= Button2H - 250){
-            return true;
-        }
-        return false;
+        charButton.setX(Button1H);
+        charButton.setY(Button1W);
     }
 
     //Called if user presses menu button or back button
@@ -279,81 +296,59 @@ public class GameScreen extends Activity {
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
         }
-        new AlertDialog.Builder(this)
-                .setTitle("Time Paused")
-                .setMessage("Would you like to resume the game?")
-                .setPositiveButton("Resume", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                createCountDown(timerValue);
-                                dialog.cancel();
-                            }
-                        }
-                )
-                .setNegativeButton("Leave", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent hs = new Intent(getApplicationContext(), MainMenu.class);
-                        startActivity(hs);
-                        dialog.cancel();
-                    }
-                })
-                .setCancelable(false)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.customdialog);
+        getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_yes);
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
+
 
     //Called when someone presses the pause button
     public void pauseClick(View a) {
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
         }
-        new AlertDialog.Builder(this)
-                .setTitle("Time Paused")
-                .setMessage("Would you like to restart the game?")
-                .setPositiveButton("Resume", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                createCountDown(timerValue);
-                                dialog.cancel();
-                            }
-                        }
-                )
-                .setNegativeButton("Leave", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent hs = new Intent(getApplicationContext(), MainMenu.class);
-                        startActivity(hs);
-                        dialog.cancel();
-                    }
-                })
-                .setCancelable(false)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        // custom dialog
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.customdialog);
+        getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_yes);
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     //Allows user to restart the game or go to main menu
     public void endGame(){
         mCountDownTimer.cancel();
         timerValue = 0;
-        new AlertDialog.Builder(this)
-                .setTitle("Game Over!")
-                .setMessage("Would you like to play again?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent hs = new Intent(getApplicationContext(), GameScreen.class);
-                                hs.putExtra("image", value);
-                                startActivity(hs);
-                                dialog.cancel();
-                            }
-                        }
-                )
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        Intent hs = new Intent(getApplicationContext(), MainMenu.class);
-                        startActivity(hs);
-                        dialog.cancel();
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.customdialog);
+        getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_yes);
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

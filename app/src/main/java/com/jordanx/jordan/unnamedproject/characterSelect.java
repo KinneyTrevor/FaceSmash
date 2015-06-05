@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 public class characterSelect extends Activity {
@@ -16,6 +18,8 @@ public class characterSelect extends Activity {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.icon1:
+                Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+                v.startAnimation(animScale);
                 x = new Intent(getApplicationContext(), GameScreen.class);
                 x.putExtra("image", "icon1.png");
                 startActivity(x);

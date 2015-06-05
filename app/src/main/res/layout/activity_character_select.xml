@@ -67,4 +67,14 @@
         android:layout_toEndOf="@+id/icon2"
         android:onClick="onClick" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timerButton"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/icon3"
+        android:layout_toStartOf="@+id/icon3"
+        android:layout_marginBottom="99dp"
+        android:src="@mipmap/timer" />
+
 </RelativeLayout>
