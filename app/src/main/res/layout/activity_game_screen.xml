@@ -134,6 +134,7 @@
         android:layout_toLeftOf="@+id/pauseButton"
         android:layout_toStartOf="@+id/pauseButton"
         android:layout_marginBottom="90dp"
-        android:background="@drawable/coin" />
+        android:background="@drawable/coin"
+        android:onClick="coinClick" />
 
 </RelativeLayout>

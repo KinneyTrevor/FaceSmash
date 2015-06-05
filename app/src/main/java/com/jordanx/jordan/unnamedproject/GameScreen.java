@@ -214,6 +214,7 @@ public class GameScreen extends Activity {
         coinButton.setVisibility(View.GONE);
         coinButton.setClickable(false);
     }
+
     //Lowers score, time, flashes red
     public void badClick(View v){
         ImageButton altbutton = (ImageButton) findViewById(R.id.badIcon);
@@ -224,7 +225,16 @@ public class GameScreen extends Activity {
         scoreText.setText(String.valueOf(userScore  ));
         timerValue = timerValue-2000;
     }
-
+    public void coinClick(View v){
+        ImageButton coin = (ImageButton) findViewById(R.id.coinButton);
+        SharedPreferences mypreferences = getSharedPreferences("App_preferences_file", Context.MODE_PRIVATE);
+        int coinAmt = mypreferences.getInt("coinCount", 0);
+        coinAmt++;
+        SharedPreferences.Editor editor = mypreferences.edit();
+        editor.putInt("coinCount", coinAmt);
+        editor.commit();
+        coin.setVisibility(View.GONE);
+    }
     //Moves the actual button
     public void moveButton() {
         ImageButton charButton = (ImageButton) findViewById(R.id.goodIcon);
