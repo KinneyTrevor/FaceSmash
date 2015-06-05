@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jordanx.jordan.unnamedproject" >
 
-    <!--//Facebook sdk internet access permission -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="true" />
@@ -18,12 +15,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".GameScreen"
+        android:name=".util.facebookLogin"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
+              <meta-data
+                android:name="com.facebook.sdk.ApplicationId"
+                   android:value="ayy"/>
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
@@ -72,7 +72,6 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
